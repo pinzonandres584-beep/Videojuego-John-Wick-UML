@@ -46,9 +46,9 @@ UC9 --> AltaMesa
 @enduml
 
 
-## Diagrama de Clases (UML)
 
-```plantuml
+
+## 2. Diagrama de Clases
 @startuml
 skinparam classAttributeIconSize 0
 
