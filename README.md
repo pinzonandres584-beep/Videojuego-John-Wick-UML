@@ -44,3 +44,4 @@ UC4 --> Continental
 UC2 --> AltaMesa
 UC9 --> AltaMesa
 @enduml
+![Nombre de la Imagen](./nombre_del_archivo.png)
