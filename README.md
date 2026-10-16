@@ -44,4 +44,110 @@ UC4 --> Continental
 UC2 --> AltaMesa
 UC9 --> AltaMesa
 @enduml
-![Nombre de la Imagen](./nombre_del_archivo.png)
+
+
+## Diagrama de Clases
+@startuml
+skinparam classAttributeIconSize 0
+
+class Personaje {
+  - id: int
+  - nombre: string
+  - saludMax: int
+  - saludActual: int
+  - nivel: int
+  - monedasOro: int
+  - esExcomunicado: boolean
+  + mover(): void
+  + atacar(): void
+  + usarHabilidad(): void
+  + equiparArma(arma: Arma): void
+  + activarBerserker(): void
+  + violarReglaContinental(): void
+}
+
+class Arma {
+  - nombre: string
+  - danoBase: int
+  - capacidadCargador: int
+  - rango: float
+  + disparar(): void
+  + recargar(): void
+}
+
+class TiendaArmas {
+  - idTienda: int
+  - nombre: string
+  - inventario: List<Arma>
+  + mostrarArmas(): List<Arma>
+  + venderArma(arma: Arma, personaje: Personaje): bool
+}
+
+abstract class BaseOperaciones {
+  - idBase: int
+  - nombre: string
+  - ciudad: string
+  - esZonaNeutral: boolean
+  + otorgarRefugio(p: Personaje): bool
+  + ofrecerServicios(): void
+}
+
+class HotelContinental {
+  - gerente: string
+  - tieneSommelier: boolean
+  - tieneSastre: boolean
+  + sanarPersonaje(p: Personaje): void
+}
+
+class RedBowery {
+  - ubicacionSubterranea: string
+  - redMensajeria: boolean
+  + venderArmasMercadoNegro(): void
+}
+
+class RuskaRoma {
+  - sindicatoFamilia: string
+  - salvoconductoActivo: boolean
+  + honrarMarcadorSangre(): void
+}
+
+abstract class Habilidad {
+  - nombre: string
+  - cooldown: float
+  - costoEnergia: int
+  + activar(): void
+  + estaDisponible(): bool
+}
+
+class ModoBerserker {
+  - multiplicadorDano: float
+  - duracionSegundos: float
+  - lifestealPorcentaje: float
+  + aumentarVelocidad(): void
+  + regenerarSalud(): void
+}
+
+class AltaMesa {
+  - nivelExcomunion: int
+  - recompensaCabeza: int
+  + asignarContrato(): void
+  + declararExcomunicado(p: Personaje): void
+  + desplegarCazarrecompensas(): void
+}
+
+' Relaciones y Herencia
+Personaje "1" o-- "*" Arma : equipa
+Personaje "1" *-- "*" Habilidad : posee
+Habilidad <|-- ModoBerserker : hereda
+TiendaArmas "1" o-- "*" Arma : vende
+
+BaseOperaciones <|-- HotelContinental : hereda
+BaseOperaciones <|-- RedBowery : hereda
+BaseOperaciones <|-- RuskaRoma : hereda
+
+HotelContinental "1" *-- "1" TiendaArmas : alberga
+Personaje "*" -- "1" BaseOperaciones : interactua
+AltaMesa ..> Personaje : persigue
+@enduml
+
+
